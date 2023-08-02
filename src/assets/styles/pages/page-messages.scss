@@ -1,0 +1,28 @@
+@import "../variables";
+@import "../mixins";
+
+.page-messages {
+  display: grid;
+  grid-template-columns: 380px auto;
+  height: 100%;
+
+  &__menu {
+    padding: 20px 10px;
+    background: $lighten-gray;
+    max-height: 100vh;
+  }
+
+  &__link {
+    text-align: right;
+  }
+  &__search {
+    margin: 14px 0 0;
+  }
+  .chats {
+    @include no-scroll;
+    max-height: 100%;
+    overflow: auto;
+    margin: 14px 0 0;
+    padding: 0 0 20px;
+  }
+}

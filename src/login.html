@@ -1,0 +1,25 @@
+{{#> page/page title="Вход" }}
+  {{#*inline "nodes"}}
+    <main class="page page-auth">
+      {{#> card/card class="auth-card card-lg"}}
+        {{#*inline "card-header"}}
+          <h1 class="title">Вход</h1>
+        {{/inline}}
+        {{#*inline "card-body"}}
+          <form action="#" class="form">
+            {{>ui/input/input class="primary" name="login" placeholder="Логин" type="text"}}
+            {{>ui/input/input class="primary" name="password" placeholder="Пароль" type="password"}}
+            <div class="form__actions">
+              {{#> ui/btn/btn class="primary block"}}
+                {{#*inline "content"}}
+                  Вход
+                {{/inline}}
+              {{/ui/btn/btn}}
+              {{> ui/link/link href="registry.html" title="Впервые?" }}
+            </div>
+          </form>
+        {{/inline}}
+      {{/card/card}}
+    </main>
+  {{/inline}}
+{{/page/page}}

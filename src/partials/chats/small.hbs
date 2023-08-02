@@ -1,0 +1,17 @@
+<div class="chat {{class}}">
+  <div class="chat__img">
+    {{#if image}}
+      <img src="{{image}}" alt="{{name}}">
+    {{/if}}
+  </div>
+  <div class="chat__body">
+    <div class="chat__name">{{name}}</div>
+    <div class="chat__description">{{description}}</div>
+  </div>
+  <div class="chat__notifications">
+    <div class="chat__time">{{time}}</div>
+    {{#if unread}}
+      <div class="chat__unread">{{unread}}</div>
+    {{/if}}
+  </div>
+</div>

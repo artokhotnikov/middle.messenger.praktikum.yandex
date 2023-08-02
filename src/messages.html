@@ -1,0 +1,42 @@
+{{#> page/page title="Мои сообщения"}}
+  {{#*inline "nodes"}}
+    <main class="page page-messages">
+      <aside class="page-messages__menu">
+        <div class="page-messages__link">
+          {{>ui/link/link href="profile.html" title="Мой профиль"}}
+        </div>
+        <form class="page-messages__search">
+          {{>ui/input/search }}
+        </form>
+        <ul class="chats">
+          <li class="chats__item">
+            {{> chats/small
+                image="https://plus.unsplash.com/premium_photo-1689551670902-19b441a6afde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+                name="Vasya Petrova"
+                description="Привет! Твой отец забыл часы у меня на тумбочке..."
+                time="11:30"
+                unread="6"
+            }}
+          </li>
+          <li class="chats__item">
+            {{> chats/small
+                name="Mikola Pogosyan"
+                description="Привет! Как дела?"
+                time="Вт"
+            }}
+          </li>
+          <li class="chats__item">
+            {{> chats/small
+                name="Nikolay"
+                description="Ну да"
+                time="Вт"
+                class="active"
+            }}
+          </li>
+        </ul>
+      </aside>
+
+      {{>chats/messenger name="Nikolay"}}
+    </main>
+  {{/inline}}
+{{/page/page}}

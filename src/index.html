@@ -1,15 +1,30 @@
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="assets/styles/main.scss" />
-  </head>
-  <body>
-    <span>hello {{username}}</span>
-    {{> button label="some click" class="primary"}}
-
-    <script type="module" src="assets/js/main.js"></script>
-  </body>
-</html>
+{{#> page/page title="Главная страница" }}
+  {{#*inline "nodes"}}
+    <main class="page page-index">
+      {{#> card/card}}
+        {{#*inline "card-header"}}
+          <h1 class="title">Список всех страниц</h1>
+        {{/inline}}
+        {{#*inline "card-body"}}
+          <div class="card__actions">
+            {{> ui/link/link href="login.html" title="Авторизация" }}
+            {{> ui/link/link href="registry.html" title="Регистрация" }}
+            {{> ui/link/link href="404.html" title="404" }}
+            {{> ui/link/link href="500.html" title="500" }}
+            {{> ui/link/link href="messages.html" title="Список чатов" }}
+          </div>
+        {{/inline}}
+      {{/card/card}}
+    </main>
+  {{/inline}}
+{{/page/page}}
+<!--
+  Авторизация готово
+  Регистрация готово
+  404 готово
+  500 готово
+  Список чатов и лента не готово
+  Настройки пользователя не готово
+  Настроить express не готово
+  Далее пункты 13-15
+-->

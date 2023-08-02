@@ -1,0 +1,26 @@
+@import "../variables";
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 37px;
+  border-radius: $radius-sm;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  &.primary {
+    color: $white;
+    background: $primary;
+  }
+
+  &.block {
+    width: 100%;
+  }
+}

@@ -1,0 +1,10 @@
+{{#>page/page title=title }}
+  {{#*inline "nodes"}}
+    <main class="page page-error">
+      <h1 class="title">Ошибка {{error}} :(</h1>
+      <div class="page-error__description">{{description}}</div>
+      {{> ui/link/link href="/" title="Вернуться на главную" }}
+    </main>
+
+  {{/inline}}
+{{/page/page}}

@@ -1,0 +1,32 @@
+@import "../variables";
+
+.card {
+  padding: 50px 30px 30px;
+  border-radius: $radius-m;
+  background: $white;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  &-lg {
+    min-height: 450px;
+  }
+
+  &__header {
+  }
+
+  &__body {
+    flex: 1 1 auto;
+  }
+
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+}

@@ -1,29 +1,27 @@
 {{#>page/page title="Регистрация" }}
-  {{#*inline "nodes"}}
-    <main class="page page-auth">
-      {{#> card/card class="auth-card"}}
-        {{#*inline "card-header"}}
-          <h1 class="title">Регистрация</h1>
-        {{/inline}}
-        {{#*inline "card-body"}}
-          <form action="#" class="form">
-            {{>ui/input/input class="primary" name="first_name" placeholder="Имя" type="text"}}
-            {{>ui/input/input class="primary" name="second_name" placeholder="Фамилия" type="text"}}
-            {{>ui/input/input class="primary" name="login" placeholder="Логин" type="text"}}
-            {{>ui/input/input class="primary" name="email" placeholder="Email" type="email"}}
-            {{>ui/input/input class="primary" name="phone" placeholder="Телефон" type="tel" }}
-            {{>ui/input/input class="primary" name="password" placeholder="Пароль" type="password"}}
-            <div class="form__actions">
-              {{#> ui/btn/btn class="primary block"}}
-                {{#*inline "content"}}
-                  Создать профиль
-                {{/inline}}
-              {{/ui/btn/btn}}
-              {{> ui/link/link href="login.html" title="Уже есть аккаунт?" }}
-            </div>
-          </form>
-        {{/inline}}
-      {{/card/card}}
-    </main>
-  {{/inline}}
+  <main class="page page-auth">
+    {{#> card/card class="auth-card"}}
+      {{#*inline "card-header"}}
+        <h1 class="title">Регистрация</h1>
+      {{/inline}}
+      {{#*inline "card-body"}}
+        <form action="#" class="form">
+          {{>ui/input/input class="primary" name="first_name" placeholder="Имя" type="text"}}
+          {{>ui/input/input class="primary" name="second_name" placeholder="Фамилия" type="text"}}
+          {{>ui/input/input class="primary" name="login" placeholder="Логин" type="text"}}
+          {{>ui/input/input class="primary" name="email" placeholder="Email" type="email"}}
+          {{>ui/input/input class="primary" name="phone" placeholder="Телефон" type="tel" }}
+          {{>ui/input/input class="primary" name="password" placeholder="Пароль" type="password"}}
+          <div class="form__actions">
+            {{#> ui/btn/btn class="primary block"}}
+              {{#*inline "content"}}
+                Создать профиль
+              {{/inline}}
+            {{/ui/btn/btn}}
+            {{> ui/link/link href="login.html" title="Уже есть аккаунт?" }}
+          </div>
+        </form>
+      {{/inline}}
+    {{/card/card}}
+  </main>
 {{/page/page}}

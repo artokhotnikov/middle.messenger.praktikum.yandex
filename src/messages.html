@@ -5,7 +5,12 @@
         {{>ui/link/link href="profile.html" title="Мой профиль"}}
       </div>
       <form class="page-messages__search">
-        {{>ui/input/search }}
+        {{>ui/input/input-text
+            type="search"
+            class="input-search"
+            name="search"
+            placeholder="Поиск"
+        }}
       </form>
       <ul class="chats">
         <li class="chats__item">

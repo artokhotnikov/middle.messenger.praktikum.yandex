@@ -1,4 +1,5 @@
 @import "../variables";
+@import "../mixins";
 
 .btn {
   display: flex;
@@ -22,5 +23,24 @@
 
   &.block {
     width: 100%;
+  }
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  gap: 12px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+
+  &__img {
+    width: 24px;
+    height: 24px;
+    @include img;
+  }
+
+  &:hover {
+    color: $primary;
   }
 }

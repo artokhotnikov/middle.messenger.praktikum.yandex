@@ -1,6 +1,6 @@
 @import "../variables";
 
-.form-control {
+.input-label {
   position: relative;
   padding: 0 0 6px;
   border-bottom: 1px solid $primary;
@@ -26,7 +26,6 @@
     border-color: $red;
   }
 
-
   .label {
     color: $gray;
     position: absolute;
@@ -43,14 +42,26 @@ input {
   display: block;
 }
 
-.search-input {
+.input-text {
   width: 100%;
   height: 32px;
 
   input {
-    background: $light-gray url("/assets/img/icons/search.svg") 5px / 20px no-repeat;
     border-radius: $radius-sm;
     height: 100%;
     padding: 0 28px;
+    background-color: $light-gray;
+  }
+
+  &.input-search {
+    input {
+      background: $light-gray url("/assets/img/icons/search.svg") 5px / 20px no-repeat;
+    }
+  }
+
+  &.rounded {
+    input {
+      border-radius: $radius-l;
+    }
   }
 }

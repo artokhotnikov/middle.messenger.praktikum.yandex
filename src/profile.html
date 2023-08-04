@@ -1,0 +1,42 @@
+{{#> page/page title="Профиль" }}
+  <main class="page page-profile">
+    <div class="profile">
+      <div class="profile__img">
+        <img
+            src="https://plus.unsplash.com/premium_photo-1689551670902-19b441a6afde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+            alt="">
+      </div>
+      <div class="profile__name">Иван</div>
+      <div class="profile__info">
+        <div class="profile__data">
+          <span>Почта</span>
+          <span>pochta@yandex.ru</span>
+        </div>
+        <div class="profile__data">
+          <span>Логин</span>
+          <span>ivanivanov</span>
+        </div>
+        <div class="profile__data">
+          <span>Имя</span>
+          <span>Иван</span>
+        </div>
+        <div class="profile__data">
+          <span>Фамилия</span>
+          <span>Иванов</span>
+        </div>
+        <div class="profile__data">
+          <span>Имя в чате</span>
+          <span>Иван</span>
+        </div>
+        <div class="profile__data">
+          <span>Телефон</span>
+          <span>+7 (909) 967 30 30</span>
+        </div>
+      </div>
+      <div class="profile__actions">
+        {{> ui/link/link href="modals.html" title="Изменить данные"}}
+        {{> ui/link/link href="modals.html" title="Изменить пароль"}}
+      </div>
+    </div>
+  </main>
+{{/page/page}}

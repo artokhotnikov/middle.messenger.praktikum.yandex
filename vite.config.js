@@ -14,6 +14,7 @@ export default defineConfig({
         notFound: resolve(__dirname, "src/404.html"),
         error: resolve(__dirname, "src/500.html"),
         messages: resolve(__dirname, "src/messages.html"),
+        profile: resolve(__dirname, "src/profile.html"),
       },
     },
   },

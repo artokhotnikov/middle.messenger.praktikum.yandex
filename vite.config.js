@@ -15,6 +15,7 @@ export default defineConfig({
         error: resolve(__dirname, "src/500.html"),
         messages: resolve(__dirname, "src/messages.html"),
         profile: resolve(__dirname, "src/profile.html"),
+        modals: resolve(__dirname, "src/modals.html"),
       },
     },
   },

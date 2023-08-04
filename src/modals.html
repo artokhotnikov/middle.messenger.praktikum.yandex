@@ -1,0 +1,63 @@
+{{#>page/page title="Модалки" }}
+  <main class="page page-modal">
+    {{#> card/card class="card-edit"}}
+      {{#*inline "card-header"}}
+        <h1 class="title">Изменить данные профиля</h1>
+      {{/inline}}
+      {{#*inline "card-body"}}
+        <form action="#" class="form">
+          {{>ui/input/input-file}}
+          {{>ui/input/input-label class="primary" name="first_name" placeholder="Имя" type="text"}}
+          {{>ui/input/input-label class="primary" name="second_name" placeholder="Фамилия" type="text"}}
+          {{>ui/input/input-label class="primary" name="display_name" placeholder="Имя в чате" type="text"}}
+          {{>ui/input/input-label class="primary" name="login" placeholder="Логин" type="text"}}
+          {{>ui/input/input-label class="primary" name="email" placeholder="Email" type="email"}}
+          {{>ui/input/input-label class="primary" name="phone" placeholder="Телефон" type="tel" }}
+          <div class="form__actions">
+            {{#> ui/btn/btn class="primary block"}}
+              {{#*inline "content"}}
+                Сохранить
+              {{/inline}}
+            {{/ui/btn/btn}}
+          </div>
+        </form>
+      {{/inline}}
+    {{/card/card}}
+    {{#> card/card class="card-edit"}}
+      {{#*inline "card-header"}}
+        <h1 class="title">Изменить пароль</h1>
+      {{/inline}}
+      {{#*inline "card-body"}}
+        <form action="#" class="form">
+          {{>ui/input/input-label class="primary" name="oldPassword" placeholder="Текущий пароль" type="password"}}
+          {{>ui/input/input-label class="primary" name="newPassword" placeholder="Новый пароль" type="password"}}
+          {{>ui/input/input-label class="primary" name="newPasswordRepeat" placeholder="Повторите новый пароль" type="password"}}
+          <div class="form__actions">
+            {{#> ui/btn/btn class="primary block"}}
+              {{#*inline "content"}}
+                Сохранить
+              {{/inline}}
+            {{/ui/btn/btn}}
+          </div>
+        </form>
+      {{/inline}}
+    {{/card/card}}
+    {{#> card/card class="card-messages"}}
+      {{#*inline "card-header"}}
+        <h1 class="title">Добавить пользователя</h1>
+      {{/inline}}
+      {{#*inline "card-body"}}
+        <form action="#" class="form">
+          {{>ui/input/input-label class="primary" name="incomingUser" placeholder="Логин пользователя" type="text"}}
+          <div class="form__actions">
+            {{#> ui/btn/btn class="primary block"}}
+              {{#*inline "content"}}
+                Добавить
+              {{/inline}}
+            {{/ui/btn/btn}}
+          </div>
+        </form>
+      {{/inline}}
+    {{/card/card}}
+  </main>
+{{/page/page}}

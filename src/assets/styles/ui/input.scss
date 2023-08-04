@@ -1,4 +1,5 @@
 @import "../variables";
+@import "../mixins";
 
 .input-label {
   position: relative;
@@ -63,5 +64,36 @@ input {
     input {
       border-radius: $radius-l;
     }
+  }
+}
+
+.input-file {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  color: $primary;
+  cursor: pointer;
+  width: 130px;
+  margin: 0 auto;
+
+  &__img {
+    @include ibg;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: $light-gray;
+  }
+
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
   }
 }

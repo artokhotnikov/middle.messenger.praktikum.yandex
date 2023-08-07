@@ -1,0 +1,102 @@
+@import "../variables";
+@import "../mixins";
+
+.messenger {
+  display: flex;
+  flex-direction: column;
+  margin: 0 16px;
+  padding: 10px 0;
+}
+
+.messenger-body {
+  @include no-scroll;
+  flex: 1 1 auto;
+  padding: 30px 0;
+  margin: 10px 0;
+  border-top: 1px solid $light-gray;
+  border-bottom: 1px solid $light-gray;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: calc(100vh - 108px);
+  overflow: auto;
+}
+
+.messenger-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__img {
+    @include ibg;
+    flex: 0 0 34px;
+    height: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: $light-gray;
+  }
+
+  &__name {
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+.messenger-menu {
+  position: relative;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 0 0 24px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  > span {
+    display: block;
+    width: 4px;
+    height: 4px;
+    background-color: $black;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  &.active {
+    > span {
+      background-color: $primary;
+    }
+  }
+}
+
+.messenger-menu-dropdown {
+  position: relative;
+}
+
+.messenger-form {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.messenger-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.message {
+  padding: 12px;
+  border-radius: $radius-sm;
+  max-width: 400px;
+  &.incoming {
+    background-color: $incoming-message;
+    align-self: flex-start;
+  }
+
+  &.outgoing {
+    background-color: $chat-hover;
+    align-self: flex-end;
+  }
+}

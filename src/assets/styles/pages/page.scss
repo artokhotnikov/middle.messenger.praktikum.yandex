@@ -1,0 +1,26 @@
+.page {
+
+}
+
+.page-index,
+.page-auth,
+.page-error,
+.page-profile,
+.page-modal {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-error {
+  &__description {
+    font-size: 24px;
+    margin: 32px 0;
+  }
+}
+.page-modal {
+  padding: 40px 0;
+  gap: 32px;
+}

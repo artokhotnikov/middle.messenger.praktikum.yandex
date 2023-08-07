@@ -1,0 +1,26 @@
+@import "../variables";
+
+.dropdown {
+  position: absolute;
+  border-radius: $radius-m;
+  background: $white;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
+  padding: 14px;
+  z-index: 10;
+
+  &.bottom {
+    right: 0;
+    top: 30px;
+  }
+
+  &.top {
+    bottom: 30px;
+    left: 0;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

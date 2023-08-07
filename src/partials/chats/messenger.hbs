@@ -1,0 +1,48 @@
+<div class="messenger">
+  <header class="messenger-header">
+    <div class="messenger-header__img">
+      {{#if image}}
+        <img src="{{image}}" alt="{{name}}"/>
+      {{/if}}
+    </div>
+    <div class="messenger-header__name">
+      {{name}}
+    </div>
+    <div class="messenger-menu active">
+      <span></span><span></span><span></span>
+      {{#> ui/dropdown/dropdown  class="bottom"}}
+        {{> ui/btn/btn-icon image="assets/img/icons/add.svg" btn="Добавить пользователя"}}
+        {{> ui/btn/btn-icon image="assets/img/icons/close.svg" btn="Удалить пользователя"}}
+      {{/ui/dropdown/dropdown}}
+    </div>
+  </header>
+  <div class="messenger-body">
+    <div class="message incoming">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto cum cupiditate distinctio dolorem
+      dolores dolorum ea, eos excepturi facere, incidunt officiis optio provident quae quos repudiandae sapiente velit
+      voluptate?
+    </div>
+    <div class="message outgoing">
+      Lorem ipsum.
+    </div>
+  </div>
+  <div class="messenger-footer">
+    <div class="messenger-menu active">
+      {{> ui/btn/btn-icon image="assets/img/icons/attach.svg"}}
+      {{#> ui/dropdown/dropdown  class="top"}}
+        {{> ui/btn/btn-icon image="assets/img/icons/photo.svg" btn="Фото или Видео"}}
+        {{> ui/btn/btn-icon image="assets/img/icons/file.svg" btn="Файл"}}
+        {{> ui/btn/btn-icon image="assets/img/icons/location.svg" btn="Локация"}}
+      {{/ui/dropdown/dropdown}}
+    </div>
+    <form action="#" class="messenger-form">
+      {{> ui/input/input-text
+          placeholder="Сообщение"
+          class="rounded"
+          name="message"
+          type="text"
+      }}
+      {{> ui/btn/btn-icon image="assets/img/icons/send.svg"}}
+    </form>
+  </div>
+</div>

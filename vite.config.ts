@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import handlebars from 'vite-plugin-handlebars'
 
+const __dirname = resolve()
 export default defineConfig({
 	root: resolve(__dirname, 'src'),
 	build: {

@@ -8,11 +8,11 @@
 		"dev": "vite",
 		"tsc-watch": "tsc --noEmit --watch",
 		"build": "vite build",
-		"start": "vite build && node server.js",
-		"preview": "vite preview"
+		"start": "vite build && node server.js"
 	},
 	"devDependencies": {
 		"@types/node": "^20.4.9",
+		"@types/uuid": "^9.0.2",
 		"@typescript-eslint/eslint-plugin": "^6.3.0",
 		"@typescript-eslint/parser": "^6.3.0",
 		"eslint": "^8.47.0",
@@ -22,5 +22,8 @@
 		"typescript": "^5.0.2",
 		"vite": "^4.4.5",
 		"vite-plugin-handlebars": "^1.6.0"
+	},
+	"dependencies": {
+		"uuid": "^9.0.0"
 	}
 }

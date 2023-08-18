@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { EventBus } from './eventBus.ts'
 import { v4 as makeUUID } from 'uuid'
-import Handlebars from 'handlebars';
+import Handlebars from 'handlebars'
 
 class Block {
 	static EVENTS: Record<string, string> = {
@@ -33,6 +33,13 @@ class Block {
 		this.eventBus.emit(Block.EVENTS.INIT)
 	}
 
+	private _registerEvents(): void {
+		this.eventBus.on(Block.EVENTS.INIT, this.init.bind(this))
+		this.eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
+		this.eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidMount.bind(this))
+		this.eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
+	}
+
 	private _getChildren(propsAndChildren): Object {
 		const children = {}
 		const props = {}
@@ -51,7 +58,7 @@ class Block {
 	// создаем подписки на события
 	private _addEvents() {
 		const { events = {} } = this.props
-
+		console.log(events)
 		Object.keys(events).forEach((eventName) => {
 			this._element!.addEventListener(eventName, events[eventName])
 		})
@@ -75,13 +82,6 @@ class Block {
 		})
 
 		return fragment.content
-	}
-
-	private _registerEvents(): void {
-		this.eventBus.on(Block.EVENTS.INIT, this.init.bind(this))
-		this.eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
-		this.eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidMount.bind(this))
-		this.eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
 	}
 
 	private _createResources(): void {

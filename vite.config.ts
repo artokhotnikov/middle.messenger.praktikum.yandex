@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import handlebars from './vite-plugin-hbs'
+import handlebars from './vite-plugin-handlebars-precompile'
 
 const __dirname = resolve()
 export default defineConfig({

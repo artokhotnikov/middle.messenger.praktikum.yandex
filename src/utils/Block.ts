@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { EventBus } from './eventBus.ts'
 import { v4 as makeUUID } from 'uuid'
-import Handlebars from 'handlebars'
+// import Handlebars from 'handlebars'
 
 class Block {
 	static EVENTS: Record<string, string> = {
@@ -14,13 +14,12 @@ class Block {
 	protected props: Record<string, unknown>
 	private _element: HTMLElement | null = null
 	private readonly _meta: { tagName: string; props: any }
-	_id: string
-	private children
+	private readonly _id: string
+	protected children
 	private eventBus: EventBus
 
 	constructor(tagName = 'div', propsAndChildren: any = {}) {
-		const { children, props } = this._getChildren(propsAndChildren)
-
+		const { children, props } = this._getChildrenAndProps(propsAndChildren)
 		this.children = children
 		this._meta = {
 			tagName,
@@ -40,7 +39,7 @@ class Block {
 		this.eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
 	}
 
-	private _getChildren(propsAndChildren): Object {
+	private _getChildrenAndProps(propsAndChildren): Object {
 		const children = {}
 		const props = {}
 
@@ -58,27 +57,27 @@ class Block {
 	// создаем подписки на события
 	private _addEvents() {
 		const { events = {} } = this.props
-		console.log(events)
 		Object.keys(events).forEach((eventName) => {
 			this._element!.addEventListener(eventName, events[eventName])
 		})
 	}
 
-	compile(template, props) {
+	protected compile(template, props) {
 		const propsAndStubs = { ...props }
-
 		Object.entries(this.children).forEach(([key, child]) => {
 			propsAndStubs[key] = `<div data-id='${child._id}'></div>`
 		})
 
-		const fragment = this._createDocumentElement('template')
+		const html = template(propsAndStubs)
+		// const fragment = this._createDocumentElement('template')
+		const fragment = document.createElement('template')
 
-		fragment.innerHTML = Handlebars.compile(template, propsAndStubs)
+		// fragment.innerHTML = Handlebars.compile(template, propsAndStubs)
+		fragment.innerHTML = html
 
 		Object.values(this.children).forEach((child) => {
-			const stub = fragment.content.querySelector(`[data-id="${child.id}"]`)
-
-			stub.replaceWith(child.getContent())
+			const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
+			stub.replaceWith(child.getContent()!)
 		})
 
 		return fragment.content
@@ -164,14 +163,14 @@ class Block {
 		this._removeEvents()
 		this._element!.innerHTML = '' // удаляем предыдущее содержимое
 
-		this._element!.innerHTML = block
+		this._element!.append(block)
 
 		this._addEvents()
 	}
 
 	// Переопределяется пользователем. Необходимо вернуть разметку
-	protected render(): string {
-		return ''
+	protected render(): DocumentFragment {
+		return new DocumentFragment()
 	}
 
 	getContent() {
@@ -192,14 +191,14 @@ class Block {
 				return typeof target[props] === 'function' ? target[props].bind(target) : target[props]
 			},
 
-			set(target, props, value) {
+			set(target, prop, value) {
 				const oldTarget = { ...target }
-				target[props] = value
+				target[prop] = value
 
 				// передаем старый обьет и новый
 				// при обновлений пропсов срабатывает этот прокси и вызывает событие cdu
 				// на него подписано _componentDidUpdate
-				self.eventBus.emit(Block.EVENTS.CDU, oldTarget, target)
+				self.eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target)
 				return true
 			},
 

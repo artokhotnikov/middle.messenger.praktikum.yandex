@@ -5,7 +5,7 @@ type ButtonProps = {
 	label: string
 	events: {
 		click: () => void
-	},
+	}
 	meta?: {
 		withInternalId?: boolean
 	}
@@ -17,6 +17,6 @@ export class Button extends Block {
 	}
 
 	protected render(): string {
-		return template({ label: this.props.label })
+		return this.compile(template, { label: this.props.label })
 	}
 }

@@ -2,18 +2,16 @@ import Block from '../../utils/Block.ts'
 import template from './home.hbs'
 import { Button } from '../../components/UI/Button'
 
+type HomePageProps = {
+	button: Button
+}
+
 export class HomePage extends Block {
-	constructor() {
-		super('div')
+	constructor(props: HomePageProps) {
+		super('div', props)
 	}
 
 	protected render(): string {
-		const button = new Button({
-			label: 'Click me',
-			events: {
-				click: () => console.log('click'),
-			},
-		})
-		return template({ button: button.getContent()?.outerHTML })
+		return this.compile(template, { button: this.props.button })
 	}
 }

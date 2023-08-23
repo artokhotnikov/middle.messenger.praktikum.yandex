@@ -2,8 +2,6 @@
 import { EventBus } from './eventBus.ts'
 import { v4 as makeUUID } from 'uuid'
 
-// import Handlebars from 'handlebars'
-
 class Block<T> {
 	static EVENTS: Record<string, string> = {
 		INIT: 'init',
@@ -12,12 +10,12 @@ class Block<T> {
 		FLOW_RENDER: 'flow:render',
 	}
 
+	_id: string
 	protected props: T
-	private _element: HTMLElement | null = null
-	private readonly _meta: { props: T }
-	private readonly _id: string
 	protected children
+	private _element: HTMLElement | null = null
 	private eventBus: EventBus
+	private readonly _meta: { props: T }
 
 	constructor(propsAndChildren: T) {
 		const { children, props } = this._getChildrenAndProps(propsAndChildren)
@@ -70,7 +68,6 @@ class Block<T> {
 		const html = template(propsAndStubs)
 		const fragment = this._createDocumentElement('template')
 
-		// fragment.innerHTML = Handlebars.compile(template, propsAndStubs)
 		fragment.innerHTML = html
 		Object.values(this.children).forEach((child) => {
 			const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
@@ -84,7 +81,9 @@ class Block<T> {
 		this.init()
 		this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
 	}
+
 	protected init(): void {}
+
 	private _componentDidMount(): void {
 		this.componentDidMount()
 		Object.values(this.children).forEach((child) => {

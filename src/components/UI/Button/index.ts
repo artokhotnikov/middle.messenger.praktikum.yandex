@@ -4,6 +4,7 @@ import template from './button.hbs'
 type ButtonProps = {
 	label: string
 	type?: 'submit' | 'button'
+	className: string,
 	events: {
 		click: () => void
 	}

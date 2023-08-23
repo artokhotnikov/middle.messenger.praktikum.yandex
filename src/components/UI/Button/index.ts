@@ -3,6 +3,7 @@ import template from './button.hbs'
 
 type ButtonProps = {
 	label: string
+	type?: 'submit' | 'button'
 	events: {
 		click: () => void
 	}
@@ -11,12 +12,12 @@ type ButtonProps = {
 	}
 }
 
-export class Button extends Block {
+export class Button extends Block<ButtonProps> {
 	constructor(props: ButtonProps) {
-		super('button', props)
+		super(props)
 	}
 
-	protected render(): string {
-		return this.compile(template, { label: this.props.label })
+	protected render(): DocumentFragment {
+		return this.compile(template, this.props)
 	}
 }

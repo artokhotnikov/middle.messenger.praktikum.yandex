@@ -1,9 +1,18 @@
-const METHODS = {
-	GET: 'GET',
-	PUT: 'PUT',
-	POST: 'POST',
-	DELETE: 'DELETE',
+type METHODS = {
+	GET: 'GET'
+	PUT: 'PUT'
+	POST: 'POST'
+	DELETE: 'DELETE'
 }
+
+type Options = {
+	method?: METHODS
+	timeout?: number
+	headers?: Record<string, string>
+	data?: Record<string, unknown>
+}
+
+type HTTPRequest = (url: string, options?: Options) => Promise<unknown>
 
 /**
  * Функцию реализовывать здесь необязательно, но может помочь не плодить логику у GET-метода
@@ -19,31 +28,31 @@ function queryStringify(data) {
 	return string.slice(0, -1)
 }
 
-class HTTPTransport {
-	get = (url, options = {}) => {
-		return this.request(url, { ...options, method: METHODS.GET }, options.timeout)
+export class HTTPTransport {
+	get: HTTPRequest = (url, options = {}) => {
+		return this.request(url, { ...options, method: 'GET' }, options.timeout)
 	}
-	put = (url, options = {}) => {
-		return this.request(url, { ...options, method: METHODS.PUT }, options.timeout)
+	put: HTTPRequest = (url, options = {}) => {
+		return this.request(url, { ...options, method: 'PUT' }, options.timeout)
 	}
-	post = (url, options = {}) => {
-		return this.request(url, { ...options, method: METHODS.POST }, options.timeout)
+	post: HTTPRequest = (url, options = {}) => {
+		return this.request(url, { ...options, method: 'POST' }, options.timeout)
 	}
-	delete = (url, options = {}) => {
-		return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout)
+	delete: HTTPRequest = (url, options = {}) => {
+		return this.request(url, { ...options, method: 'DELETE' }, options.timeout)
 	}
 	// PUT, POST, DELETE
 
 	// options:
 	// headers — obj
 	// data — obj
-	request = (url, options = { method: METHODS.GET }, timeout = 5000) => {
+	request = (url, options = { method: 'GET' }, timeout = 5000) => {
 		const { method, data, headers } = options
 
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest()
 
-			if (method === METHODS.GET && data) {
+			if (method === 'GET' && data) {
 				xhr.open(method, url + queryStringify(data))
 			} else {
 				xhr.open(method, url)
@@ -68,34 +77,11 @@ class HTTPTransport {
 			xhr.onerror = handleError
 			xhr.ontimeout = handleError
 
-			if (method === METHODS.GET || !data) {
+			if (method === 'GET' || !data) {
 				xhr.send()
 			} else {
 				xhr.send(JSON.stringify(data))
 			}
 		})
 	}
-}
-
-// eslint-disable-next-line no-unused-vars
-function fetchWithRetry(url, options = { retries: 5 }) {
-	let tries = 0
-
-	const req = new HTTPTransport()
-
-	const retrySend = () => {
-		return req
-			.get(url, options)
-			.then((response) => {
-				return response
-			})
-			.catch((error) => {
-				tries += 1
-				if (tries === options.retries) {
-					throw new Error(error)
-				}
-				return retrySend()
-			})
-	}
-	return retrySend()
 }

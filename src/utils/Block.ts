@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
 import { EventBus } from './eventBus.ts'
 import { v4 as makeUUID } from 'uuid'
+
 // import Handlebars from 'handlebars'
 
-class Block {
+class Block<T> {
 	static EVENTS: Record<string, string> = {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
@@ -11,18 +12,17 @@ class Block {
 		FLOW_RENDER: 'flow:render',
 	}
 
-	protected props: Record<string, unknown>
+	protected props: T
 	private _element: HTMLElement | null = null
-	private readonly _meta: { tagName: string; props: any }
+	private readonly _meta: { props: T }
 	private readonly _id: string
 	protected children
 	private eventBus: EventBus
 
-	constructor(tagName = 'div', propsAndChildren: any = {}) {
+	constructor(propsAndChildren: T) {
 		const { children, props } = this._getChildrenAndProps(propsAndChildren)
 		this.children = children
 		this._meta = {
-			tagName,
 			props,
 		}
 		this._id = makeUUID()
@@ -33,16 +33,15 @@ class Block {
 	}
 
 	private _registerEvents(): void {
-		this.eventBus.on(Block.EVENTS.INIT, this.init.bind(this))
+		this.eventBus.on(Block.EVENTS.INIT, this._init.bind(this))
 		this.eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
-		this.eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidMount.bind(this))
+		this.eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
 		this.eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
 	}
 
-	private _getChildrenAndProps(propsAndChildren): Object {
+	private _getChildrenAndProps(propsAndChildren: T): Object {
 		const children = {}
 		const props = {}
-
 		Object.entries(propsAndChildren).forEach(([key, value]) => {
 			if (value instanceof Block) {
 				children[key] = value
@@ -69,34 +68,23 @@ class Block {
 		})
 
 		const html = template(propsAndStubs)
-		// const fragment = this._createDocumentElement('template')
-		const fragment = document.createElement('template')
+		const fragment = this._createDocumentElement('template')
 
 		// fragment.innerHTML = Handlebars.compile(template, propsAndStubs)
 		fragment.innerHTML = html
-
 		Object.values(this.children).forEach((child) => {
 			const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
 			stub.replaceWith(child.getContent()!)
 		})
-
 		return fragment.content
 	}
 
-	private _createResources(): void {
-		const { tagName } = this._meta
-		this._element = this._createDocumentElement(tagName)
-	}
-
-	// создаем элемент обертку и вызывает первый рендер
-	init(): void {
-		// создание обертки
-		this._createResources()
-
+	private _init(): void {
 		// тригер ренденр
+		this.init()
 		this.eventBus.emit(Block.EVENTS.FLOW_RENDER)
 	}
-
+	protected init(): void {}
 	private _componentDidMount(): void {
 		this.componentDidMount()
 		Object.values(this.children).forEach((child) => {
@@ -104,14 +92,14 @@ class Block {
 		})
 	}
 
-	componentDidMount(oldProps?) {}
+	componentDidMount(oldProps?: T) {}
 
 	public dispatchComponentDidMount() {
 		this.eventBus.emit(Block.EVENTS.FLOW_CDM)
 	}
 
 	//
-	private _componentDidUpdate(oldProps: any, newProps: any) {
+	private _componentDidUpdate(oldProps: T, newProps: T) {
 		// если это событие возвращает true
 		// то вызываем событие рендера
 		if (this.componentDidUpdate(oldProps, newProps)) {
@@ -160,11 +148,13 @@ class Block {
 	private _render() {
 		const block = this.render() // render теперь возвращает DocumentFragment
 
+		const newElement = block.firstElementChild as HTMLElement
+		if (this._element) {
+			this._element.replaceWith(newElement)
+		}
+
+		this._element = newElement
 		this._removeEvents()
-		this._element!.innerHTML = '' // удаляем предыдущее содержимое
-
-		this._element!.append(block)
-
 		this._addEvents()
 	}
 
@@ -180,11 +170,9 @@ class Block {
 	// создаем прокси для пропсов
 	// ставим ловушки на изменение пропсов
 	// обновляем его и вызываем событие component-did-update
-	_makePropsProxy(props: any) {
+	_makePropsProxy(props: T) {
 		// Ещё один способ передачи this, но он больше не применяется с приходом ES6+
 		const self = this
-
-		// Здесь вам предстоит реализовать метод
 
 		return new Proxy(props, {
 			get(target, props) {
@@ -194,7 +182,6 @@ class Block {
 			set(target, prop, value) {
 				const oldTarget = { ...target }
 				target[prop] = value
-
 				// передаем старый обьет и новый
 				// при обновлений пропсов срабатывает этот прокси и вызывает событие cdu
 				// на него подписано _componentDidUpdate

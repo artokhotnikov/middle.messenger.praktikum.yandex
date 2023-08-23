@@ -5,13 +5,19 @@ window.addEventListener('DOMContentLoaded', () => {
 	const root = document.querySelector('#app')
 
 	const button = new Button({
-		label: 'Click',
+		label: 'Clic123k',
+		type: 'submit',
 		events: {
-			click: () => console.log('click'),
+			click: function () {
+				button.setProps({
+					label: Math.random(),
+				})
+			},
 		},
 	})
 
-	const homePage = new HomePage({ button })
+
+	const homePage = new HomePage({ button, title: '1333' })
 
 	root.append(homePage.getContent()!)
 })

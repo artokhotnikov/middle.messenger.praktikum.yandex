@@ -4,14 +4,15 @@ import { Button } from '../../components/UI/Button'
 
 type HomePageProps = {
 	button: Button
+	title: string
 }
 
-export class HomePage extends Block {
+export class HomePage extends Block<HomePageProps> {
 	constructor(props: HomePageProps) {
-		super('div', props)
+		super(props)
 	}
 
-	protected render(): string {
-		return this.compile(template, { button: this.props.button })
+	protected render(): DocumentFragment {
+		return this.compile(template, this.props)
 	}
 }

@@ -11,7 +11,7 @@ export default function handlebars(): PluginOption {
 			}
 			// language=typescript
 			const code = `
-				import Handlebars from 'handlebars/runtime';
+				import Handlebars from 'handlebars';
 
 				export default Handlebars.template(${Handlebars.precompile(src)});
 			`

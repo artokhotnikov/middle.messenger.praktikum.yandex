@@ -71,6 +71,9 @@ class Block<T> {
 		fragment.innerHTML = html
 		Object.values(this.children).forEach((child) => {
 			const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
+			if (!stub) {
+				return
+			}
 			stub.replaceWith(child.getContent()!)
 		})
 		return fragment.content
